@@ -199,9 +199,9 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc
     
 # Copy busybox into ramdisk and symlink to blkid
-$(shell mkdir -p out/target/product/jflte/root/sbin)
-$(shell cp $(LOCAL_PATH)/rootdir/etc/sbin/busybox out/target/product/jflte/root/sbin/busybox)
-$(shell cd out/target/product/jflte/root/sbin && ln -s busybox blkid)
+$(shell mkdir -p out/target/product/jactivelte/root/sbin)
+$(shell cp $(LOCAL_PATH)/rootdir/etc/sbin/busybox out/target/product/jactivelte/root/sbin/busybox)
+$(shell cd out/target/product/jactivelte/root/sbin && ln -s busybox blkid)
 
 # Thermal
 PRODUCT_COPY_FILES += \
