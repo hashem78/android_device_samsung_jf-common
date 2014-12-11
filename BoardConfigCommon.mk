@@ -59,8 +59,6 @@ BOARD_USES_SEPERATED_VOICE_SPEAKER := true
 BOARD_USES_SEPERATED_VOIP := true
 TARGET_USES_QCOM_COMPRESSED_AUDIO := true
 QCOM_ADSP_SSR_ENABLED := false
-QCOM_ANC_HEADSET_ENABLED := false
-QCOM_FLUENCE_ENABLED := false
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/jf-common/bluetooth
@@ -145,8 +143,28 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/samsung/jf-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+    device.te \
     file_contexts \
-    insthk.te
+    insthk.te \
+    healthd.te \
+    kernel.te \
+    keypad_dev.te \
+    mdm_helper.te \
+    mm-pp-daemon.te \
+    mm-qcamerad.te \
+    mpdecision.te \
+    panel_dev.te \
+    property.te \
+    property_contexts \
+    rild.te \
+    system_app.te \
+    system_server.te \
+    tee.te \
+    thermal-engine.te \
+    ueventd.te \
+    vibe_dev.te \
+    vold.te \
+    wpa.te
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
