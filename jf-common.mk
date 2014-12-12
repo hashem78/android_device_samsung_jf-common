@@ -197,7 +197,7 @@ PRODUCT_PACKAGES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    fstab.tmp \
+    tmpfstab \
     check_fs.sh \
     init.carrier.rc \
     init.crda.sh \

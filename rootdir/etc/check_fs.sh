@@ -38,23 +38,23 @@ FS_DATA0=$(eval $(/sbin/blkid /dev/block/mmcblk0p29 | /sbin/busybox cut -c 24-);
 FS_SYSTEM0=$(eval $(/sbin/blkid /dev/block/mmcblk0p16 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
 
 if [ "$FS_SYSTEM0" == "ext4" ]; then
-	$BB sed -i "s/# EXT4SYS//g" /fstab.tmp;
+	$BB sed -i "s/# EXT4SYS//g" /tmpfstab;
 elif [ "$FS_SYSTEM0" == "f2fs" ]; then
-	$BB sed -i "s/# F2FSSYS//g" /fstab.tmp;
+	$BB sed -i "s/# F2FSSYS//g" /tmpfstab;
 fi;
 
 if [ "$FS_CACHE0" == "ext4" ]; then
-	$BB sed -i "s/# EXT4CAC//g" /fstab.tmp;
+	$BB sed -i "s/# EXT4CAC//g" /tmpfstab;
 elif [ "$FS_CACHE0" == "f2fs" ]; then
-	$BB sed -i "s/# F2FSCAC//g" /fstab.tmp;
+	$BB sed -i "s/# F2FSCAC//g" /tmpfstab;
 else
-	$BB sed -i "s/# F2FSCAC//g" /fstab.tmp;
+	$BB sed -i "s/# F2FSCAC//g" /tmpfstab;
 fi;
 
 if [ "$FS_DATA0" == "ext4" ]; then
-	$BB sed -i "s/# EXT4DAT//g" /fstab.tmp;
+	$BB sed -i "s/# EXT4DAT//g" /tmpfstab;
 elif [ "$FS_DATA0" == "f2fs" ]; then
-	$BB sed -i "s/# F2FSDAT//g" /fstab.tmp;
+	$BB sed -i "s/# F2FSDAT//g" /tmpfstab;
 fi;
 
-$BB mv /fstab.tmp /fstab.qcom;
+$BB mv /tmpfstab /fstab.qcom;
