@@ -1,4 +1,4 @@
-#!/sbin/busybox sh
+#!/sbin/sh
 # Copyright (c) 2012, Code Aurora Forum. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,49 +27,47 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-BB=/sbin/busybox
-
 # run only if fstab is the original one
-if ! $BB cat /fstab.qcom | $BB grep -q "CHECK_FS_OK"; then
-    exit 0
+if ! /sbin/cat /fstab.qcom | /sbin/grep -q "CHECK_FS_OK"; then
+    exit 0;
 fi
 
-$BB mount -o remount,rw /;
-$BB mv /fstab.qcom /fstab.org;
+/sbin/mount -o remount,rw /;
+/sbin/mv /fstab.qcom /fstab.org;
 
-FS_CACHE0=$(eval $(/sbin/blkid /dev/block/mmcblk0p18 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
-FS_DATA0=$(eval $(/sbin/blkid /dev/block/mmcblk0p29 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
-FS_SYSTEM0=$(eval $(/sbin/blkid /dev/block/mmcblk0p16 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
+FS_CACHE0=$(eval $(/sbin/blkid /dev/block/mmcblk0p18 | /sbin/cut -c 24-); /sbin/echo $TYPE);
+FS_DATA0=$(eval $(/sbin/blkid /dev/block/mmcblk0p29 | /sbin/cut -c 24-); /sbin/echo $TYPE);
+FS_SYSTEM0=$(eval $(/sbin/blkid /dev/block/mmcblk0p16 | /sbin/cut -c 24-); /sbin/echo $TYPE);
 
 # dualboot or not
-if $BB cat /fstab.org | $BB grep -q "/raw-system"; then
-  $BB sed -i "s/CF_SYSTEM/raw-system/g" /tmpfstab;
-  $BB sed -i "s/CF_CACHE/raw-cache/g" /tmpfstab;
-  $BB sed -i "s/CF_DATA/raw-data/g" /tmpfstab;
+if /sbin/cat /fstab.org | /sbin/grep -q "/raw-system"; then
+  /sbin/sed -i "s/CF_SYSTEM/raw-system/g" /tmpfstab;
+  /sbin/sed -i "s/CF_CACHE/raw-cache/g" /tmpfstab;
+  /sbin/sed -i "s/CF_DATA/raw-data/g" /tmpfstab;
 else
-  $BB sed -i "s/CF_SYSTEM/system/g" /tmpfstab;
-  $BB sed -i "s/CF_CACHE/cache/g" /tmpfstab;
-  $BB sed -i "s/CF_DATA/data/g" /tmpfstab;
+  /sbin/sed -i "s/CF_SYSTEM/system/g" /tmpfstab;
+  /sbin/sed -i "s/CF_CACHE/cache/g" /tmpfstab;
+  /sbin/sed -i "s/CF_DATA/data/g" /tmpfstab;
 fi
 
 if [ "$FS_SYSTEM0" == "ext4" ]; then
-	$BB sed -i "s/# EXT4SYS//g" /tmpfstab;
+	/sbin/sed -i "s/# EXT4SYS//g" /tmpfstab;
 elif [ "$FS_SYSTEM0" == "f2fs" ]; then
-	$BB sed -i "s/# F2FSSYS//g" /tmpfstab;
+	/sbin/sed -i "s/# F2FSSYS//g" /tmpfstab;
 fi;
 
 if [ "$FS_CACHE0" == "ext4" ]; then
-	$BB sed -i "s/# EXT4CAC//g" /tmpfstab;
+	/sbin/sed -i "s/# EXT4CAC//g" /tmpfstab;
 elif [ "$FS_CACHE0" == "f2fs" ]; then
-	$BB sed -i "s/# F2FSCAC//g" /tmpfstab;
+	/sbin/sed -i "s/# F2FSCAC//g" /tmpfstab;
 else
-	$BB sed -i "s/# F2FSCAC//g" /tmpfstab;
+	/sbin/sed -i "s/# F2FSCAC//g" /tmpfstab;
 fi;
 
 if [ "$FS_DATA0" == "ext4" ]; then
-	$BB sed -i "s/# EXT4DAT//g" /tmpfstab;
+	/sbin/sed -i "s/# EXT4DAT//g" /tmpfstab;
 elif [ "$FS_DATA0" == "f2fs" ]; then
-	$BB sed -i "s/# F2FSDAT//g" /tmpfstab;
+	/sbin/sed -i "s/# F2FSDAT//g" /tmpfstab;
 fi;
 
-$BB mv /tmpfstab /fstab.qcom;
+/sbin/mv /tmpfstab /fstab.qcom;

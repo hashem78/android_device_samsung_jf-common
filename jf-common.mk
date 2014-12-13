@@ -205,10 +205,19 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
     
-# Copy busybox into ramdisk and symlink to blkid
+# Copy busybox into ramdisk and symlink to tools
 $(shell mkdir -p out/target/product/jactivelte/root/sbin)
-$(shell cp $(LOCAL_PATH)/rootdir/etc/sbin/busybox out/target/product/jactivelte/root/sbin/busybox)
-$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e blkid ]; then ln -s ./busybox blkid; fi)
+$(shell cp $(LOCAL_PATH)/rootdir/etc/sbin/bbox out/target/product/jactivelte/root/sbin/bbox)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e busybox ]; then ln -s ./bbox busybox; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e blkid ]; then ln -s ./bbox blkid; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e mv ]; then ln -s ./bbox mv; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e echo ]; then ln -s ./bbox echo; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e sed ]; then ln -s ./bbox sed; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e grep ]; then ln -s ./bbox grep; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e cut ]; then ln -s ./bbox cut; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e cat ]; then ln -s ./bbox cat; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e mount ]; then ln -s ./bbox mount; fi)
+$(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e sh ]; then ln -s ./bbox sh; fi)
 
 # Thermal
 PRODUCT_COPY_FILES += \
