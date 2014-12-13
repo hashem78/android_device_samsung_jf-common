@@ -29,18 +29,28 @@
 
 BB=/sbin/busybox
 
-# don't run with multirom fstab
-if [ -e /mrom.fstab ]; then
+# run only if fstab is the original one
+if ! $BB cat /fstab.qcom | $BB grep -q "CHECK_FS_OK"; then
     exit 0
 fi
 
 $BB mount -o remount,rw /;
-
 $BB mv /fstab.qcom /fstab.org;
 
 FS_CACHE0=$(eval $(/sbin/blkid /dev/block/mmcblk0p18 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
 FS_DATA0=$(eval $(/sbin/blkid /dev/block/mmcblk0p29 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
 FS_SYSTEM0=$(eval $(/sbin/blkid /dev/block/mmcblk0p16 | /sbin/busybox cut -c 24-); /sbin/busybox echo $TYPE);
+
+# dualboot or not
+if $BB cat /fstab.org | $BB grep -q "/raw-system"; then
+  $BB sed -i "s/CF_SYSTEM/raw-system/g" /tmpfstab;
+  $BB sed -i "s/CF_CACHE/raw-cache/g" /tmpfstab;
+  $BB sed -i "s/CF_DATA/raw-data/g" /tmpfstab;
+else
+  $BB sed -i "s/CF_SYSTEM/system/g" /tmpfstab;
+  $BB sed -i "s/CF_CACHE/cache/g" /tmpfstab;
+  $BB sed -i "s/CF_DATA/data/g" /tmpfstab;
+fi
 
 if [ "$FS_SYSTEM0" == "ext4" ]; then
 	$BB sed -i "s/# EXT4SYS//g" /tmpfstab;
