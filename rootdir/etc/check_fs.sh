@@ -29,6 +29,11 @@
 
 BB=/sbin/busybox
 
+# don't run with multirom fstab
+if [ -e /mrom.fstab ]; then
+    exit 0
+fi
+
 $BB mount -o remount,rw /;
 
 $BB mv /fstab.qcom /fstab.org;
