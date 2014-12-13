@@ -222,7 +222,6 @@ $(shell cd out/target/product/jactivelte/root/sbin && if [ ! -e sh ]; then ln -s
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermald.conf:system/etc/thermald.conf \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf \
     $(LOCAL_PATH)/configs/thermal-engine-8064ab.conf:system/etc/thermal-engine-8064ab.conf
 
