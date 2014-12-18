@@ -178,14 +178,6 @@ BOARD_SEPOLICY_UNION += \
     vold.te \
     wpa.te
 
-# Time services
-BOARD_USES_QC_TIME_SERVICES := true
-
-# Vendor Init
-TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_jflte
-TARGET_LIBINIT_DEFINES_FILE := device/samsung/jf-common/init/init_jflte.c
-
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 28
