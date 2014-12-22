@@ -155,6 +155,7 @@ BOARD_SEPOLICY_UNION += \
     insthk.te \
     kernel.te \
     keypad_dev.te \
+    macloader.te \
     mdm_helper.te \
     mediaserver.te \
     mm-pp-daemon.te \
