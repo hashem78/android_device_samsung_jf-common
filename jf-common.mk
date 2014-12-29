@@ -264,6 +264,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608 \
     ro.sf.lcd_density=480
 
+# media
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.use-awesome=true \
+    qcom.hw.aac.encoder=true
+
 # radio
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.ds_fmc_app.mode=0 \
