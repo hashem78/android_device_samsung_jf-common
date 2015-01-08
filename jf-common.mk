@@ -120,10 +120,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/gps.conf:/system/etc/gps.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:/system/etc/sap.conf
-    
+
 # IR
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/consumerir/consumerir.msm8960.so:/system/lib/hw/consumerir.msm8960.so
+PRODUCT_PACKAGES += \
+    consumerir.msm8960
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
