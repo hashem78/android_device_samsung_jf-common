@@ -137,9 +137,6 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_FSTAB := device/samsung/jf-common/rootdir/etc/fstab.qcom
 
-# Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/jf-common/releasetools
-
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/jf-common/ril
 

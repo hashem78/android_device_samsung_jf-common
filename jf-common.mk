@@ -139,13 +139,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     lights.msm8960
 
-# Loki
-PRODUCT_PACKAGES += \
-    loki_tool \
-    loki.sh \
-    loki_bootloaders \
-    recovery-transform.sh
-
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
