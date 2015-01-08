@@ -265,7 +265,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # media
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.use-awesome=true \
+    persist.sys.media.use-awesome=true \
     qcom.hw.aac.encoder=true
 
 # radio
