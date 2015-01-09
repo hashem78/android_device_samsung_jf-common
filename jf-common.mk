@@ -183,10 +183,6 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     power.msm8960
 
-# QRNGD
-PRODUCT_PACKAGES += \
-    qrngd
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
@@ -194,6 +190,7 @@ PRODUCT_PACKAGES += \
     check_fs.sh \
     init.carrier.rc \
     init.crda.sh \
+    init.led.sh \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.target.rc \
