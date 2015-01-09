@@ -73,11 +73,24 @@ on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
     setprop qcom.audio.init complete
+    chown system graphics /sys/class/graphics/fb1/hpd
+    chown system graphics /sys/class/graphics/fb1/vendor_name
+    chown system graphics /sys/class/graphics/fb1/product_description
+    chown system system /sys/class/graphics/fb1/format_3d
+    chmod 0664 /sys/class/graphics/fb1/hpd
+    chmod 0664 /sys/class/graphics/fb1/vendor_name
+    chmod 0664 /sys/class/graphics/fb1/product_description
+    chmod 0664 /sys/class/graphics/fb1/format_3d
+    chmod 0664 /sys/class/graphics/fb1/video_mode
+    symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
 on boot-pause
     exec system/bin/battery_charging
 
 on boot
+    # enable pulsing led on boot
+    write /sys/class/sec/led/led_pattern 6
+
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -479,11 +492,6 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service loc_launcher /system/bin/loc_launcher
-    #loc_launcher will start as root and set its uid to gps
-    class late_start
-    group gps qcom_oncrpc inet net_raw qcom_diag net_admin wifi
-
 #for WiFi MFG(TestMode)
 service mfgloader /system/bin/mfgloader
     class main
@@ -726,6 +734,10 @@ on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
 on property:persist.sys.ssr.restart_level=3
     write /sys/module/subsystem_restart/parameters/restart_level 3
+
+on property:dev.bootcomplete=1
+    # disable pulsing led on boot complete
+    exec /system/bin/sh /system/etc/init.led.sh
 
 # Powersave
 on property:sys.perf.profile=0
