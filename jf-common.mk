@@ -155,7 +155,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnfc-nci \
     libnfc_nci_jni \
-    nfc_nci.bcm2079x.default \
+    nfc_nci.bcm2079x.msm8960 \
     NfcNci \
     Tag \
     com.android.nfc_extras
@@ -263,7 +263,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1 \
     persist.radio.fill_eons=1 \
     persist.radio.use_se_table_only=1 \
-    rild.libpath=/system/lib/libsec-ril.so \
     ro.telephony.ril.config=newDriverCallU,newDialCode
 
 # gps
